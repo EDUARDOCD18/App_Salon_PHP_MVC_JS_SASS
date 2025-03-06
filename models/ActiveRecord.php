@@ -2,16 +2,17 @@
 namespace Model;
 class ActiveRecord {
 
-    // Base DE DATOS
+    /* -- Base de Datos -- */
     protected static $db;
+    protected static $columnasDB = []; // Columnas de la BD
     protected static $tabla = '';
-    protected static $columnasDB = [];
 
     // Alertas y Mensajes
     protected static $alertas = [];
     
     // Definir la conexión a la BD - includes/database.php
-    public static function setDB($database) {
+    public static function setDB($database)
+    {
         self::$db = $database;
     }
 
