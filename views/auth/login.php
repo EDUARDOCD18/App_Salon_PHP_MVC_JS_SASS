@@ -12,10 +12,10 @@
     </div>
 
     <div class="campo">
-        <label for="password">Contraseña</label>
+        <label for="password">Clave</label>
         <input
             type="password"
-            placeholder="Tu contraseña"
+            placeholder="Tu clave"
             id="passwordd¡"
             name="password" />
     </div>
@@ -25,5 +25,5 @@
 
 <div class="acciones">
     <a href="/crear-cuenta">¿No te has registrado? Crea tu cuenta</a>
-    <a href="/olvide">¿Olvidaste te contraseña? Recupérala aquí</a>
+    <a href="/olvide">¿Olvidaste te clave? Recupérala aquí</a>
 </div>
