@@ -1,6 +1,7 @@
 <?php
 
 namespace Controllers;
+
 use MVC\Router;
 
 class LoginController
@@ -30,8 +31,10 @@ class LoginController
     }
 
     // Crear cuenta
-    public static function crear()
+    public static function crear(Router $router)
     {
-        echo "crear cuenta";
+        $router->render('auth/crear-cuenta', [
+            
+        ]);
     }
 }
