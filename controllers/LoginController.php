@@ -19,9 +19,11 @@ class LoginController
     }
 
     // Olvidar contraseña
-    public static function olvide()
+    public static function olvide(Router $router)
     {
-        echo "Password olvidado";
+        $router->render('auth/olvide-password',[
+            
+        ]);
     }
 
     // Recuperar contraseña
@@ -34,7 +36,7 @@ class LoginController
     public static function crear(Router $router)
     {
         $router->render('auth/crear-cuenta', [
-            
+
         ]);
     }
 }
