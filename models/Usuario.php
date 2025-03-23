@@ -59,4 +59,16 @@ class Usuario extends ActiveRecord
 
         return self::$alertas;
     }
+
+    // Validar si el usuario existe
+    public function existeUsuario()
+    {
+        $query = " SELECT * FROM " . self::$tabla . " WHERE email = '" . $this->email . "' LIMIT 1";
+        $resultado = self::$db->query($query);
+
+        if ($resultado->num_rows) {
+            self::$alertas['error'][] = 'El correo se encuentra asociado a otra cuenta';
+        }
+        return $resultado;
+    }
 }

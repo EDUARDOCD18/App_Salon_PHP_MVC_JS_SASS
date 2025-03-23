@@ -46,7 +46,13 @@ class LoginController
 
             // Revisar que alerta esté vacío
             if (empty($alertas)) {
-                echo "Pasaste la validación";
+                $resultado = $usuario->existeUsuario();
+
+                if ($resultado->num_rows) {
+                    $alertas = Usuario::getAlertas();
+                } else {
+                    // No está registrado
+                }
             }
         }
 
