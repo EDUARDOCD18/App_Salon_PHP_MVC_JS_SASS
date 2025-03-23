@@ -44,6 +44,18 @@ class Usuario extends ActiveRecord
         if (!$this->apellido) {
             self::$alertas['error'][] = 'El campo \'Apelldio\' no puede estar vacío.';
         }
+        if (!$this->telefono) {
+            self::$alertas['error'][] = 'El campo \'Teléfono\' no puede estar vacío.';
+        }
+        if (!$this->email) {
+            self::$alertas['error'][] = 'El campo \'Correo\' no puede estar vacío.';
+        }
+        if (!$this->password) {
+            self::$alertas['error'][] = 'El campo \'Clave\' no puede estar vacío.';
+        }
+        if (strlen($this->password) < 8) {
+            self::$alertas['error'][] = 'La clave debe poseer mínimo 8 caracteres.';
+        }
 
         return self::$alertas;
     }
