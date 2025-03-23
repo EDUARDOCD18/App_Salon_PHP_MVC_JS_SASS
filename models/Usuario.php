@@ -34,4 +34,17 @@ class Usuario extends ActiveRecord
         $this->confirmado = $args['cofirmado'] ?? null;
         $this->token = $args['token'] ?? '';
     }
+
+    // Mensaje de validación para la creación de cuenta
+    public function validarNuevaCuenta()
+    {
+        if (!$this->nombre) {
+            self::$alertas['error'][] = 'El campo \'Nombre\' no puede estar vacío.';
+        }
+        if (!$this->apellido) {
+            self::$alertas['error'][] = 'El campo \'Apelldio\' no puede estar vacío.';
+        }
+
+        return self::$alertas;
+    }
 }
