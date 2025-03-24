@@ -54,6 +54,9 @@ class LoginController
                     // Hashear el password
                     $usuario->hashPassword();
 
+                    // Generar Toeken único
+                    $usuario->crearToken();
+
                     debuguear($usuario);
                     // No está registrado
 
