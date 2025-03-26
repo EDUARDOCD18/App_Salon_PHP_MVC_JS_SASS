@@ -61,6 +61,8 @@ class LoginController
                     // Enviar email
                     $email = new Email($usuario->email, $usuario->nombre, $usuario->token);
 
+                    $email->enviarConfirmacion();
+
                     debuguear($email);
                     debuguear($usuario);
                     // No está registrado
