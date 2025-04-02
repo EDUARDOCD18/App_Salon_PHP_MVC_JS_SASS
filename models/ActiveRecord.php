@@ -117,8 +117,8 @@ class ActiveRecord {
         return array_shift( $resultado ) ;
     }
 
-    // Busca un registro por su token
-    public static function where($columna, $valor): ActiveRecord {
+    // Busca un registro por where 
+    public static function where($columna, $valor) {
         $query = "SELECT * FROM " . static::$tabla  ." WHERE $columna = '$valor'";
         $resultado = self::consultarSQL($query);
         return array_shift( $resultado ) ;
