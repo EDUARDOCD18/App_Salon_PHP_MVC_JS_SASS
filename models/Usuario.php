@@ -60,6 +60,19 @@ class Usuario extends ActiveRecord
         return self::$alertas;
     }
 
+    // Validar el inicio de sesión
+    public function validarLogin()
+    {
+        if (!$this->email) {
+            self::$alertas['error'][] = 'El campo \'Correo\' no puede estar vacío.';
+        }
+        if (!$this->password) {
+            self::$alertas['error'][] = 'El campo \'Clave\' no puede estar vacío.';
+        }
+
+        return self::$alertas;
+    }
+
     // Validar si el usuario existe
     public function existeUsuario()
     {
@@ -74,12 +87,14 @@ class Usuario extends ActiveRecord
 
 
     /* Hashear el password */
-    public function hashPassword(){
+    public function hashPassword()
+    {
         $this->password = password_hash($this->password, PASSWORD_BCRYPT);
     }
 
     /* Enviar el Token único */
-    public function crearToken(){
+    public function crearToken()
+    {
         $this->token = uniqid();
     }
 }

@@ -8,10 +8,23 @@ use MVC\Router;
 
 class LoginController
 {
-    // Inicias sesión
+    // Iniciar sesión
     public static function login(Router $router)
     {
-        $router->render('auth/login');
+        $alertas = [];
+        $auth = new Usuario; /* Autocompletar el usuario */
+
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $auth  = new Usuario($_POST);
+
+            // Validar el inicio de sesión
+            $alertas = $auth->validarLogin();
+        }
+
+        $router->render('auth/login', [
+            'alertas' => $alertas,
+            'auth' => $auth
+        ]);
     }
 
     // Cerrar sesión
@@ -93,7 +106,7 @@ class LoginController
 
         $token = s($_GET['token']);
         $usuario = Usuario::where('token', $token);
-        
+
         if (empty($usuario)) {
             // Mostrar mensaje de error
             Usuario::setAlerta('error', 'TOKEN NO VÁLIDO');
