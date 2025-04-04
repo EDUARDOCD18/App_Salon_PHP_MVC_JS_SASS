@@ -19,8 +19,26 @@ class LoginController
 
             // Validar el inicio de sesión
             $alertas = $auth->validarLogin();
+
+            /* En caso de que el usuario haya suministrado email y clave,
+            validar que el mismo exista */
+            if (empty($alertas)) {
+                // Comprobar que el usuario exista
+                $usuario = Usuario::where('email', $auth->email);
+
+                if($usuario){
+                    // Verificar que la clave sea la correcta
+                    
+
+                } else {
+                    // Si el usuario no existe
+                    Usuario::setAlerta('error', 'LA CUENTA NO EXISTE');
+                }
+            }
         }
 
+        $alertas = Usuario::getAlertas();
+        
         $router->render('auth/login', [
             'alertas' => $alertas,
             'auth' => $auth
