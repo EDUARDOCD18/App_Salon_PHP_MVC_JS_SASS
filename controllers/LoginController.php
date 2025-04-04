@@ -28,7 +28,7 @@ class LoginController
 
                 if($usuario){
                     // Verificar que la clave sea la correcta
-                    
+                    $usuario->comprobarPasswordAndVerificado($auth->password);
 
                 } else {
                     // Si el usuario no existe
