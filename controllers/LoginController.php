@@ -26,10 +26,11 @@ class LoginController
                 // Comprobar que el usuario exista
                 $usuario = Usuario::where('email', $auth->email);
 
-                if($usuario){
+                if ($usuario) {
                     // Verificar que la clave sea la correcta
-                    $usuario->comprobarPasswordAndVerificado($auth->password);
-
+                    if ($usuario->comprobarPasswordAndVerificado($auth->password)) {
+                        
+                    }
                 } else {
                     // Si el usuario no existe
                     Usuario::setAlerta('error', 'LA CUENTA NO EXISTE');
@@ -38,7 +39,7 @@ class LoginController
         }
 
         $alertas = Usuario::getAlertas();
-        
+
         $router->render('auth/login', [
             'alertas' => $alertas,
             'auth' => $auth
