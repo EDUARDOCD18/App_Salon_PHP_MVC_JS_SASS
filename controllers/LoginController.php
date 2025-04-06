@@ -88,10 +88,14 @@ class LoginController
                 // Confirmar que la cuenta exista y esté confirmada
                 if ($usuario && $usuario->confirmado === "1") {
                     // Generar nuevo token para recuperar la clave
-                    $usuario->crearToken();
-                    $usuario->guardar();
+                    $usuario->crearToken(); /* Crea el token */
+                    $usuario->guardar(); /* Actualiza los datos en la BDD */
 
-                    // TODO: Enviar el email con el nuevo token
+                    // Enviar el email con el nuevo token
+                    $email = new Email($usuario->email, $usuario->nombre, $usuario->token);
+                    $email->enviarInstrucciones();
+
+                    // Alerta de éxito
                     Usuario::setAlerta('exito', 'SE HA ENVIADO A TU CORREO LOS PASOS PARA RECUPERAR LA CONTRASEÑA.');
                 } else {
                     Usuario::setAlerta('error', 'LA CUENTA NO EXISTE O NO ESTÁ CONFIRMADA');
