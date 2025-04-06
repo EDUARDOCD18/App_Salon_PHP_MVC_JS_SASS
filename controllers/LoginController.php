@@ -83,8 +83,23 @@ class LoginController
 
             // En caso de que el correo haya sido validado
             if (empty($alertas)) {
+                $usuario = Usuario::where('email', $auth->email);
+
+                // Confirmar que la cuenta exista y esté confirmada
+                if ($usuario && $usuario->confirmado === "1") {
+                    // Generar nuevo token para recuperar la clave
+                    $usuario->crearToken();
+                    $usuario->guardar();
+
+                    // TODO: Enviar el email con el nuevo token
+                    Usuario::setAlerta('exito', 'SE HA ENVIADO A TU CORREO LOS PASOS PARA RECUPERAR LA CONTRASEÑA.');
+                } else {
+                    Usuario::setAlerta('error', 'LA CUENTA NO EXISTE O NO ESTÁ CONFIRMADA');
+                }
             }
         }
+
+        $alertas = Usuario::getAlertas();
 
         $router->render('auth/olvide-password', [
             'alertas' => $alertas
