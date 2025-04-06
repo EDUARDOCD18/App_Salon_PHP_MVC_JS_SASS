@@ -29,7 +29,26 @@ class LoginController
                 if ($usuario) {
                     // Verificar que la clave sea la correcta
                     if ($usuario->comprobarPasswordAndVerificado($auth->password)) {
-                        
+                        // Autenticar el usuario
+                        if (!isset($_SESSION)) {
+                            session_start();
+                        };
+
+                        $_SESSION['id'] = $usuario->id;
+                        $_SESSION['nombre'] = $usuario->nombre . " " . $usuario->apellido;
+                        $_SESSION['email'] = $usuario->email;
+                        $_SESSION['login'] = true;
+
+                        /*  Redireccionamiento, validar si es admin o no */
+                        if ($usuario->admin === "1") {
+                            $_SESSION['admin'] = $usuario->admin ?? null;
+
+                            // Redirecciona al panel de administracion 
+                            header('Location: /admin');
+                        } else {
+                            // Redirecciona al panel de citas
+                            header('Location: /cita');
+                        }
                     }
                 } else {
                     // Si el usuario no existe
