@@ -8,7 +8,7 @@ use MVC\Router;
 
 class LoginController
 {
-    // Iniciar sesión
+    /* Iniciar sesión */
     public static function login(Router $router)
     {
         $alertas = [];
@@ -65,7 +65,7 @@ class LoginController
         ]);
     }
 
-    // Cerrar sesión
+    /* Cerrar sesión */
     public static function logout()
     {
         echo "Desde logout";
@@ -113,7 +113,28 @@ class LoginController
     /* Recuperar contraseña */
     public static function recuperar(Router $router)
     {
-        $router->render('auth/recuperar-password', []);
+        $alertas = [];
+        $error = false;
+        $token = s($_GET['token']);
+
+        // Buscar la cuenta por el token en la BDD
+        $usuario = Usuario::where('token', $token);
+
+        if (empty($usuario)) {
+            Usuario::setAlerta('error', 'TOKEN NO VÁLIDO');
+            $error = true;
+        }
+
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            // Leer la nueva clave y guardarla
+        }
+
+        $alertas = Usuario::getAlertas();
+
+        $router->render('auth/recuperar-password', [
+            'alertas' => $alertas,
+            'error' => $error
+        ]);
     }
 
     /* Crear cuenta */

@@ -1,4 +1,11 @@
+<!-- FORMULARIO PARA NUEVA CLAVE DE ACCESO -->
+
 <h1 class="nombre-pagina">Recupera tu clave de acceso</h1>
+
+<?php include_once __DIR__ . "/../templates/alertas.php" ?> <!-- Importa el template de las alertas -->
+
+<?php if($error) return null; ?>
+
 <p class="descripcion-pagina">Coloca tu nueva clave de acceso a continuación</p>
 
 <form class="fomulario" method="POST">
