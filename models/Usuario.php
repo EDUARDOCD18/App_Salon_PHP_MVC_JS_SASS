@@ -79,6 +79,18 @@ class Usuario extends ActiveRecord
         if (!$this->email) {
             self::$alertas['error'][] = 'El campo \'Correo\' no puede estar vacío.';
         }
+        return self::$alertas;
+    }
+
+    /* Validar el password */
+    public function validarPassword()
+    {
+        if (!$this->password) {
+            self::$alertas['error'][] = 'LA CLAVE ES OBLIGATORIA';
+        }
+        if (strlen($this->password) < 8) {
+            self::$alertas['error'][] = 'LA CLAVE DEBE TENER COMO MÍNIMO 8 CARACTERES';
+        }
 
         return self::$alertas;
     }

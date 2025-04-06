@@ -127,6 +127,25 @@ class LoginController
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // Leer la nueva clave y guardarla
+
+            $password = new Usuario($_POST);
+            $alertas = $password->validarPassword();
+
+            // Una vez se valide que el campo no está vacío y que posee los 8 caracteres
+            if (empty($alertas)) {
+                $usuario->password = null; /* Resetea el campo */
+                $usuario->password = $password->password; /* Asigna la nueva clave */
+                $usuario->hashPassword(); /* Hashea la clave */
+                $usuario->token = null; /* Resetea el token */
+
+                $resultado = $usuario->guardar(); /* Guarda en la BDD */
+
+                if($resultado){
+                    header('Location: /');
+                }
+
+                debuguear($usuario);
+            }
         }
 
         $alertas = Usuario::getAlertas();
