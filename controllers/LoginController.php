@@ -110,13 +110,13 @@ class LoginController
         ]);
     }
 
-    // Recuperar contraseña
-    public static function recuperar()
+    /* Recuperar contraseña */
+    public static function recuperar(Router $router)
     {
-        echo "Recuperar password";
+        $router->render('auth/recuperar-password', []);
     }
 
-    // Crear cuenta
+    /* Crear cuenta */
     public static function crear(Router $router)
     {
         $usuario = new Usuario;
