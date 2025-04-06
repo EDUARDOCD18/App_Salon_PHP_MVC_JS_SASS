@@ -1,5 +1,11 @@
+<!-- FORMULARIO PARA EL CASO EN QUE AL USUARIO SE LE OLVIDE LA CONTRASEÑA -->
+
 <h1 class="nombre-pagina">Olvide clave</h1>
 <p class="descripcion-pagina">Restablecer clave. Indica el correo asociado en la cuenta a continuación</p>
+
+
+<?php include_once __DIR__ . "/../templates/alertas.php" ?> <!-- Importa el template de las alertas -->
+
 
 <form action="/olvide" class="formulario" method="post">
     <div class="campo">

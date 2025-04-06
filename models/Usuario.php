@@ -35,7 +35,7 @@ class Usuario extends ActiveRecord
         $this->token = $args['token'] ?? '';
     }
 
-    // Mensaje de validación para la creación de cuenta
+    /*  Mensaje de validación para la creación de cuenta */
     public function validarNuevaCuenta()
     {
         if (!$this->nombre) {
@@ -60,7 +60,7 @@ class Usuario extends ActiveRecord
         return self::$alertas;
     }
 
-    // Validar el inicio de sesión
+    /* Validar el inicio de sesión */
     public function validarLogin()
     {
         if (!$this->email) {
@@ -73,7 +73,17 @@ class Usuario extends ActiveRecord
         return self::$alertas;
     }
 
-    // Validar si el usuario existe
+    /* Validar el email */
+    public function validarEmail()
+    {
+        if (!$this->email) {
+            self::$alertas['error'][] = 'El campo \'Correo\' no puede estar vacío.';
+        }
+
+        return self::$alertas;
+    }
+
+    /* Validar si el usuario existe */
     public function existeUsuario()
     {
         $query = " SELECT * FROM " . self::$tabla . " WHERE email = '" . $this->email . "' LIMIT 1";

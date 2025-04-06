@@ -71,10 +71,24 @@ class LoginController
         echo "Desde logout";
     }
 
-    // Olvidar contraseña
+    /* Contraseña olvidada */
     public static function olvide(Router $router)
     {
-        $router->render('auth/olvide-password', []);
+        $alertas = [];
+
+        // Validar que el método sea POST
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $auth = new Usuario($_POST);
+            $alertas = $auth->validarEmail();
+
+            // En caso de que el correo haya sido validado
+            if (empty($alertas)) {
+            }
+        }
+
+        $router->render('auth/olvide-password', [
+            'alertas' => $alertas
+        ]);
     }
 
     // Recuperar contraseña
