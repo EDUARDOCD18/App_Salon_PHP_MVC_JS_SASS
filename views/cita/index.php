@@ -5,18 +5,23 @@
 
 <div id="app">
 
+
+    <!-- PESTEÑAS -->
     <nav class="tabs">
         <button class="actual" type="button" data-paso="1">Servicios</button>
-        <button class="actual" type="button" data-paso="2">Información cita</button>
-        <button class="actual" type="button" data-paso="3">Resumen</button>
+        <button type="button" data-paso="2">Información cita</button>
+        <button type="button" data-paso="3">Resumen</button>
     </nav>
 
+    <!-- PASO 1 -->
     <div id="paso-1" class="seccion">
         <h2>Servicios</h2>
         <p class="text-center">Elige tus servicios a continuación</p>
 
         <div class="listados-servicios" id="servicios"></div>
     </div>
+
+    <!-- PASO 2 -->
     <div id="paso-2" class="seccion">
 
         <h2>Tus datos y citas</h2>
@@ -38,8 +43,16 @@
             </div>
         </form>
     </div>
+
+    <!--  PASO 3-->
     <div id="paso-3" class="seccion">
         <h2>Resumen</h2>
         <p class="text-center">Verificar que la información sea correcta</p>
+    </div>
+
+    <!-- PAGINACIÓN -->
+    <div class="paginacion">
+        <button class="boton" id="anterior">&laquo; Anterior</button>
+        <button class="boton" id="siguiente">Siguiente &raquo;</button>
     </div>
 </div>
