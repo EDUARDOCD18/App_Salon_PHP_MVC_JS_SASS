@@ -11,7 +11,17 @@ function iniciarApp() {
 
 /* MOSTRAR LA SECCIÓN */
 function mostrarSeccion() {
-  console.log("Mostrar sección");
+  // Mostrar la sección que tenga la clase de mostrar
+  const seccionAnterior = document.querySelector(".mostrar");
+
+  if (seccionAnterior) {
+    seccionAnterior.classList.remove("mostrar");
+  }
+
+  // Mostrar la sección con el paso
+  const pasoSelector = `#paso-${paso}`;
+  const seccion = document.querySelector(pasoSelector);
+  seccion.classList.add("mostrar"); // Agregar la clase de mostrar
 }
 
 /* TABS */
