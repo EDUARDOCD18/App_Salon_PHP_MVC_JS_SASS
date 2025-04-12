@@ -1,4 +1,6 @@
 let paso = 1;
+const pasoIncial = 1;
+const pasoFinal = 3;
 
 document.addEventListener("DOMContentLoaded", function () {
   iniciarApp();
@@ -9,6 +11,8 @@ function iniciarApp() {
   mostrarSeccion(); // Muestra y oculta las secciones
   tabs(); // Cambia de sección cuando se presionen los tabs
   botonesPaginador(); // Agrega o quita los botones del paginador
+  paginaAnterior(); // Moverse a tab anterior
+  paginaSiguiente(); // Moverse al tab siguiente
 }
 
 /* MOSTRAR LA SECCIÓN */
@@ -65,4 +69,30 @@ function botonesPaginador() {
     paginaAnterior.classList.remove("ocultar");
     paginaSiguiente.classList.remove("ocultar");
   }
+
+  mostrarSeccion();
+}
+
+/* PAGINA ANTERIOR */
+function paginaAnterior() {
+  const paginaAnterior = document.querySelector("#anterior");
+  paginaAnterior.addEventListener("click", function () {
+    // Evaluar si el paso actual es menor al inicial
+    if (paso <= pasoIncial) return;
+    paso--;
+
+    botonesPaginador();
+  });
+}
+
+/* PAGINA SIGUIENTE */
+function paginaSiguiente() {
+  const paginaSiguiente = document.querySelector("#siguiente");
+  paginaSiguiente.addEventListener("click", function () {
+    // Evaluar si el paso actual es menor al inicial
+    if (paso >= pasoFinal) return;
+    paso++;
+
+    botonesPaginador();
+  });
 }
