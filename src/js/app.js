@@ -6,6 +6,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 /* INICIAR APP  */
 function iniciarApp() {
+  mostrarSeccion(); // Muestra y oculta las secciones
   tabs(); // Cambia de sección cuando se presionen los tabs
 }
 
@@ -22,6 +23,16 @@ function mostrarSeccion() {
   const pasoSelector = `#paso-${paso}`;
   const seccion = document.querySelector(pasoSelector);
   seccion.classList.add("mostrar"); // Agregar la clase de mostrar
+
+  // Quita la clase actual del tab anterior
+  const tabAnterior = document.querySelector(".actual");
+  if (tabAnterior) {
+    tabAnterior.classList.remove("actual");
+  }
+
+  // Resalta el tab actual
+  const tab = document.querySelector(`[data-paso="${paso}"]`);
+  tab.classList.add("actual");
 }
 
 /* TABS */
