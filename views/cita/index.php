@@ -18,7 +18,7 @@
         <h2>Servicios</h2>
         <p class="text-center">Elige tus servicios a continuación</p>
 
-        <div class="listados-servicios" id="servicios"></div>
+        <div class="listado-servicios" id="servicios"></div>
     </div>
 
     <!-- PASO 2 -->

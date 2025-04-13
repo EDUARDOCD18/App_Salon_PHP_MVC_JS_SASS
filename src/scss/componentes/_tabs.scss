@@ -21,6 +21,10 @@
     &:hover {
       cursor: pointer;
       background-color: darken(v.$azul, 10%);
+      transition-property: transform;
+      transition-duration: 300ms;
+      text-align: center;
+      transform: scale(1.1);
     }
 
     &.actual {
