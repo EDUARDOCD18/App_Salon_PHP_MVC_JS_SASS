@@ -20,7 +20,10 @@ function iniciarApp() {
   botonesPaginador(); // Agrega o quita los botones del paginador
   paginaAnterior(); // Moverse a tab anterior
   paginaSiguiente(); // Moverse al tab siguiente
+
   consultarAPI(); // Realiza consultas a la API en el backend de PHP
+
+  nombreCliente(); // Registra el nombre del cliente
 }
 
 /* MOSTRAR LA SECCIÓN */
@@ -152,8 +155,23 @@ function mostarServicios(servicios) {
 function seleccionarServicio(servicio) {
   const { id } = servicio;
   const { servicios } = cita;
-  cita.servicios = [...servicios, servicio];
+  const divServicio = document.querySelector(`[data-id-servicio="${id}"]`); // Identificar el elemento al que se le da click
 
-  const divServicio = document.querySelector(`[data-id-servicio="${id}"]`);
-  divServicio.classList.add("seleccionado");
+  // Comprobar si un servicio ya ha sido seleccionado
+  if (servicios.some((agregado) => agregado.id === id)) {
+    // Eliminarno
+    cita.servicios = servicios.filter((agregado) => agregado.id !== id);
+    divServicio.classList.remove("seleccionado");
+  } else {
+    // Agregarlo
+    cita.servicios = [...servicios, servicio];
+    divServicio.classList.add("seleccionado");
+  }
+
+  console.log(cita);
+}
+
+/* NOMBRE CLIENTE */
+function nombreCliente() {
+  cita.nombre = document.querySelector("#nombre").value; // Adjunta el nombre del cliente en el arreglo de la cita
 }
