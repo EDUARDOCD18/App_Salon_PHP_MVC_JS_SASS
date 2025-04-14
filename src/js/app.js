@@ -24,6 +24,7 @@ function iniciarApp() {
   consultarAPI(); // Realiza consultas a la API en el backend de PHP
 
   nombreCliente(); // Registra el nombre del cliente
+  seleccionarFecha(); // Registra la fecha para la cita
 }
 
 /* MOSTRAR LA SECCIÓN */
@@ -174,4 +175,19 @@ function seleccionarServicio(servicio) {
 /* NOMBRE CLIENTE */
 function nombreCliente() {
   cita.nombre = document.querySelector("#nombre").value; // Adjunta el nombre del cliente en el arreglo de la cita
+}
+
+/* FECHA DE LA CITA */
+function seleccionarFecha() {
+  const inputFecha = document.querySelector("#fecha");
+  inputFecha.addEventListener("input", function (e) {
+    const dia = new Date(e.target.value).getUTCDay();
+
+    if ([6, 0].includes(dia)) {
+      e.target.value = "";
+      /* mostrarAlerta("Fines de semana no permitidos", "error", ".formulario");
+    } else { */
+      cita.fecha = e.target.value;
+    }
+  });
 }
