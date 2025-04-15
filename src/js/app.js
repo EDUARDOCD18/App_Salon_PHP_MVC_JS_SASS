@@ -20,11 +20,10 @@ function iniciarApp() {
   botonesPaginador(); // Agrega o quita los botones del paginador
   paginaAnterior(); // Moverse a tab anterior
   paginaSiguiente(); // Moverse al tab siguiente
-
   consultarAPI(); // Realiza consultas a la API en el backend de PHP
-
   nombreCliente(); // Registra el nombre del cliente
   seleccionarFecha(); // Registra la fecha para la cita
+  seleccionarHora(); // Registra la hora para la cita
 }
 
 /* MOSTRAR LA SECCIÓN */
@@ -188,6 +187,24 @@ function seleccionarFecha() {
       mostrarAlerta("Fines de semana no permitidos", "error", ".formulario");
     } else {
       cita.fecha = e.target.value;
+    }
+  });
+}
+
+/* HORA DE LA CITA */
+function seleccionarHora() {
+  const inputHora = document.querySelector("#hora");
+  inputHora.addEventListener("input", function (e) {
+    console.log(e.target.value);
+
+    const horaCita = e.target.value;
+    const hora = horaCita.split(":")[0];
+
+    if (hora < 10 || hora > 19) {
+      e.target.value = "";
+      mostrarAlerta("Horario no válido");
+    } else {
+      cita.hora = e.target.value;
     }
   });
 }
