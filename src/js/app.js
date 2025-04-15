@@ -185,9 +185,30 @@ function seleccionarFecha() {
 
     if ([6, 0].includes(dia)) {
       e.target.value = "";
-      /* mostrarAlerta("Fines de semana no permitidos", "error", ".formulario");
-    } else { */
+      mostrarAlerta("Fines de semana no permitidos", "error", ".formulario");
+    } else {
       cita.fecha = e.target.value;
     }
   });
+}
+
+/* MOSTRAR ALERTA */
+function mostrarAlerta(mensaje, tipo) {
+  // Previene que se genere más de una alera
+  const alertaPrevia = document.querySelector(".alerta");
+  if (alertaPrevia) return;
+
+  // Crear la alerta
+  const alerta = document.createElement("DIV");
+  alerta.textContent = mensaje;
+  alerta.classList.add("alerta");
+  alerta.classList.add("error");
+
+  const formulario = document.querySelector(".formulario");
+
+  // Elimiar la alerta
+  setTimeout(() => {
+    alerta.remove();
+  }, 3000);
+  formulario.appendChild(alerta);
 }
