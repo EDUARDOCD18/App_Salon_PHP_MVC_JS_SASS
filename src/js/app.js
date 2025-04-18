@@ -207,7 +207,7 @@ function seleccionarHora() {
 
     if (hora < 10 || hora > 19) {
       e.target.value = "";
-      mostrarAlerta("Horario no válido");
+      mostrarAlerta("Horario no válido", "error", ".formulario");
     } else {
       cita.hora = e.target.value;
     }
@@ -215,33 +215,47 @@ function seleccionarHora() {
 }
 
 /* MOSTRAR ALERTA */
-function mostrarAlerta(mensaje, tipo) {
-  // Previene que se genere más de una alera
+function mostrarAlerta(mensaje, tipo, elemento, desaparece = true) {
+  // Previene que se generen más de 1 alerta
   const alertaPrevia = document.querySelector(".alerta");
-  if (alertaPrevia) return;
+  if (alertaPrevia) {
+    alertaPrevia.remove();
+  }
 
-  // Crear la alerta
+  // Scripting para crear la alerta
   const alerta = document.createElement("DIV");
   alerta.textContent = mensaje;
   alerta.classList.add("alerta");
-  alerta.classList.add("error");
+  alerta.classList.add(tipo);
 
-  const formulario = document.querySelector(".formulario");
+  const referencia = document.querySelector(elemento);
+  referencia.appendChild(alerta);
 
-  // Elimiar la alerta
-  setTimeout(() => {
-    alerta.remove();
-  }, 3000);
-  formulario.appendChild(alerta);
+  if (desaparece) {
+    // Eliminar la alerta
+    setTimeout(() => {
+      alerta.remove();
+    }, 3000);
+  }
 }
 
 /* MOSTRAR RESUMEN */
 function mostrarResumen() {
   const resumen = document.querySelector(".contenido-resumen");
 
-  if (Object.values(cita).includes("")) {
-    console.log("Datos incompletos");
-  } else {
-    console.log("si");
+  // Limpiar el Contenido de Resumen
+  while (resumen.firstChild) {
+    resumen.removeChild(resumen.firstChild);
+  }
+
+  if (Object.values(cita).includes("") || cita.servicios.length === 0) {
+    mostrarAlerta(
+      "Faltan datos de Servicios, Fecha u Hora",
+      "error",
+      ".contenido-resumen",
+      false
+    );
+
+    return;
   }
 }
