@@ -24,6 +24,7 @@ function iniciarApp() {
   nombreCliente(); // Registra el nombre del cliente
   seleccionarFecha(); // Registra la fecha para la cita
   seleccionarHora(); // Registra la hora para la cita
+  mostrarResumen(); // Mostrar el resumen de la cita
 }
 
 /* MOSTRAR LA SECCIÓN */
@@ -61,6 +62,10 @@ function tabs() {
 
       mostrarSeccion(); // Mostrar la sección
       botonesPaginador(); // Botones del paginador
+
+      if (paso === 3) {
+        mostrarResumen();
+      }
     });
   });
 }
@@ -228,4 +233,15 @@ function mostrarAlerta(mensaje, tipo) {
     alerta.remove();
   }, 3000);
   formulario.appendChild(alerta);
+}
+
+/* MOSTRAR RESUMEN */
+function mostrarResumen() {
+  const resumen = document.querySelector(".contenido-resumen");
+
+  if (Object.values(cita).includes("")) {
+    console.log("Datos incompletos");
+  } else {
+    console.log("si");
+  }
 }
