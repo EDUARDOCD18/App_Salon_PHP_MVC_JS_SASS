@@ -172,8 +172,6 @@ function seleccionarServicio(servicio) {
     cita.servicios = [...servicios, servicio];
     divServicio.classList.add("seleccionado");
   }
-
-  console.log(cita);
 }
 
 /* NOMBRE CLIENTE */
@@ -200,8 +198,6 @@ function seleccionarFecha() {
 function seleccionarHora() {
   const inputHora = document.querySelector("#hora");
   inputHora.addEventListener("input", function (e) {
-    console.log(e.target.value);
-
     const horaCita = e.target.value;
     const hora = horaCita.split(":")[0];
 
@@ -285,16 +281,27 @@ function mostrarResumen() {
     resumen.appendChild(contenedorServicio);
   });
 
-   // Heading para los datos del cliente
-   const headingCita = document.createElement("H3");
-   headingCita.textContent = "Datos del cliente";
-   resumen.appendChild(headingCita);
+  // Heading para los datos del cliente
+  const headingCita = document.createElement("H3");
+  headingCita.textContent = "Datos del cliente";
+  resumen.appendChild(headingCita);
 
   const nombreCliente = document.createElement("P");
   nombreCliente.innerHTML = `<span>Nombre:</span> ${nombre}`;
 
+  // Formatear la fecha en español
+  const fechaObj = new Date(fecha);
+  const mes = fechaObj.getMonth();
+  const dia = fechaObj.getDate() + 2;
+  const year = fechaObj.getFullYear();
+
+  const fechaUTC = new Date(Date.UTC(year, mes, dia));
+  const opciones = { weekday: "long", year: "numeric", month: "long", day: "numeric" };
+  const fechaFormateda = fechaUTC.toLocaleDateString("es-VE", opciones);
+  console.log(fechaFormateda);
+
   const fechaCita = document.createElement("P");
-  fechaCita.innerHTML = `<span>Fecha:</span> ${fecha}`;
+  fechaCita.innerHTML = `<span>Fecha:</span> ${fechaFormateda}`;
 
   const horaCita = document.createElement("P");
   horaCita.innerHTML = `<span>Hora:</span> ${hora}`;
@@ -302,5 +309,4 @@ function mostrarResumen() {
   resumen.appendChild(nombreCliente);
   resumen.appendChild(fechaCita);
   resumen.appendChild(horaCita);
-  console.log(nombreCliente);
 }
