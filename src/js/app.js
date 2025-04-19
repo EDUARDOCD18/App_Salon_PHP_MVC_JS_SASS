@@ -221,8 +221,12 @@ function mostrarAlerta(mensaje, tipo, elemento, desaparece = true) {
   // Scripting para crear la alerta
   const alerta = document.createElement("DIV");
   alerta.textContent = mensaje;
-  alerta.classList.add("alerta");
-  alerta.classList.add(tipo);
+  alerta.classList.add("alerta", tipo);
+
+  // Animación de entrada (pequeño "grow")
+  requestAnimationFrame(() => {
+    alerta.classList.add("animar");
+  });
 
   const referencia = document.querySelector(elemento);
   referencia.appendChild(alerta);
@@ -230,7 +234,11 @@ function mostrarAlerta(mensaje, tipo, elemento, desaparece = true) {
   if (desaparece) {
     // Eliminar la alerta
     setTimeout(() => {
-      alerta.remove();
+      alerta.classList.remove("animar");
+      alerta.classList.add("ocultar");
+      setTimeout(() => {
+        alerta.remove();
+      }, 500);
     }, 3000);
   }
 }
@@ -251,14 +259,13 @@ function mostrarResumen() {
       ".contenido-resumen",
       false
     );
-
     return;
   }
 
   // Formatear el div de resumen
-  const { nombre, fecha, hora, servicios } = cita;
+  const { nombre, fecha, hora, servicios } = cita; // 'hora' aquí está en formato "HH:MM" (ej: "14:30")
 
-  // Heading para los servicio en resumeb
+  // Heading para los servicio en resumen
   const headingServicios = document.createElement("H3");
   headingServicios.textContent = "Resumen de los servicios";
   resumen.appendChild(headingServicios);
@@ -292,21 +299,43 @@ function mostrarResumen() {
   // Formatear la fecha en español
   const fechaObj = new Date(fecha);
   const mes = fechaObj.getMonth();
-  const dia = fechaObj.getDate() + 2;
+  const dia = fechaObj.getDate() + 2; 
   const year = fechaObj.getFullYear();
 
   const fechaUTC = new Date(Date.UTC(year, mes, dia));
-  const opciones = { weekday: "long", year: "numeric", month: "long", day: "numeric" };
-  const fechaFormateda = fechaUTC.toLocaleDateString("es-VE", opciones);
-  console.log(fechaFormateda);
+  const opcionesFecha = {
+    // Renombrado para claridad
+    weekday: "long",
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  };
+  const fechaFormateada = fechaUTC.toLocaleDateString("es-VE", opcionesFecha); // Corregido 'opciones' a 'opcionesFecha'
 
   const fechaCita = document.createElement("P");
-  fechaCita.innerHTML = `<span>Fecha:</span> ${fechaFormateda}`;
+  fechaCita.innerHTML = `<span>Fecha:</span> ${fechaFormateada}`;
+
+  // --- INICIO: Formateo de la Hora ---
+  const [horas24, minutos] = hora.split(":"); // Separa horas y minutos (ej: "14", "30")
+  let horas12 = parseInt(horas24, 10); // Convierte las horas a número
+  const ampm = horas12 >= 12 ? "PM" : "AM"; // Determina si es AM o PM
+
+  if (horas12 === 0) {
+    // Caso de medianoche (00:xx)
+    horas12 = 12;
+  } else if (horas12 > 12) {
+    // Caso de horas PM (13 en adelante)
+    horas12 -= 12;
+  }
+  // Las horas de 1 a 11 AM no necesitan cambio numérico
+
+  const horaFormateada = `${horas12}:${minutos} ${ampm}`; // Construye la hora formateada (ej: "2:30 PM")
+  // --- FIN: Formateo de la Hora ---
 
   const horaCita = document.createElement("P");
-  horaCita.innerHTML = `<span>Hora:</span> ${hora}`;
+  horaCita.innerHTML = `<span>Hora:</span> ${horaFormateada}`; // <<< Usa la hora formateada
 
   resumen.appendChild(nombreCliente);
   resumen.appendChild(fechaCita);
-  resumen.appendChild(horaCita);
+  resumen.appendChild(horaCita); // <<< Se añade el párrafo con la hora formateada
 }
