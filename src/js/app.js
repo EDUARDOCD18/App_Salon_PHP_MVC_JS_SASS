@@ -299,7 +299,7 @@ function mostrarResumen() {
   // Formatear la fecha en español
   const fechaObj = new Date(fecha);
   const mes = fechaObj.getMonth();
-  const dia = fechaObj.getDate() + 2; 
+  const dia = fechaObj.getDate() + 2;
   const year = fechaObj.getFullYear();
 
   const fechaUTC = new Date(Date.UTC(year, mes, dia));
@@ -335,7 +335,19 @@ function mostrarResumen() {
   const horaCita = document.createElement("P");
   horaCita.innerHTML = `<span>Hora:</span> ${horaFormateada}`; // <<< Usa la hora formateada
 
+  // Botón para crear una cita
+  const botonReservar = document.createElement("BUTTON");
+  botonReservar.classList.add("boton");
+  botonReservar.textContent = "Reservar cita";
+  botonReservar.onclick = reservarCita;
+
   resumen.appendChild(nombreCliente);
   resumen.appendChild(fechaCita);
   resumen.appendChild(horaCita); // <<< Se añade el párrafo con la hora formateada
+  resumen.append(botonReservar);
+}
+
+/* RESERVAR CITA */
+function reservarCita() {
+  console.log("Reservando cita...");
 }
