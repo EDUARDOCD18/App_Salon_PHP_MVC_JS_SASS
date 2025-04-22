@@ -348,9 +348,17 @@ function mostrarResumen() {
 }
 
 /* RESERVAR CITA */
-function reservarCita() {
+async function reservarCita() {
   const datos = new FormData();
   datos.append("nombre", "javi");
+
+  // Peticón hacia la API
+  const url = "http://localhost:3000/api/citas";
+  const respuesta = await fetch(url, { method: "POST" });
+  const resultado = await respuesta.json();
+
+  console.log(respuesta);
+  console.log(resultado);
 
   // console.log([...datos]);
 }
