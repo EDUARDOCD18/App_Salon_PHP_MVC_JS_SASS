@@ -11,4 +11,11 @@ class APIController
         $servicios = Servicio::all();
         echo json_encode($servicios);
     }
+
+    public static function guardar()
+    {
+        $respuesta = ['mensaje' => 'OK'];
+
+        echo json_encode($respuesta);
+    }
 }
