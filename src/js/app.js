@@ -365,13 +365,32 @@ async function reservarCita() {
   datos.append("hora", hora);
   datos.append("servicios", idServicios);
 
-  // Peticón hacia la API
-  const url = "http://localhost:3000/api/citas";
-  const respuesta = await fetch(url, {
-    method: "POST",
-    body: datos,
-  });
-  const resultado = await respuesta.json();
+  try {
+    // Peticón hacia la API
+    const url = "http://localhost:3000/api/citas";
+    const respuesta = await fetch(url, {
+      method: "POST",
+      body: datos,
+    });
+    const resultado = await respuesta.json();
 
-  console.log([...datos]);
+    if (resultado.resultado) {
+      Swal.fire({
+        icon: "sucess",
+        title: "Cita agendada",
+        text: "Tu cita ha sido agendado correctamente",
+        button: "OK",
+      }).then((result) => {
+        setTimeout(() => {
+          window.location.reload();
+        }, 3000);
+      });
+    }
+  } catch (error) {Swal.fire({
+    icon: "error",
+    title: "Error",
+    text: "Error al agendar la cita"
+  });}
+
+  // console.log([...datos]);
 }
