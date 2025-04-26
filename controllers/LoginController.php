@@ -68,7 +68,9 @@ class LoginController
     /* Cerrar sesión */
     public static function logout()
     {
-        echo "Desde logout";
+        session_start(); /* Inicia la sesión */
+        $_SESSION = []; /* Limpia la sesión */
+        header('Location: /'); /* Redirecciona al login */
     }
 
     /* Contraseña olvidada */

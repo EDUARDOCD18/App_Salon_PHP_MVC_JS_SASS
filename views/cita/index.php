@@ -1,10 +1,15 @@
 <!-- VISTA PARA ELEGIR LOS SERVICIOS A AGENDAR EN UNA MISMA CITA -->
 
+<div class="barra">
+    <p>Hola, <?php echo $nombre ?? ''; ?></p>
+    <a href="/logout" class="boton">Cerrar sesión</a>
+</div>
+
 <h1 class="nombre-pagina">Registra tu nueva cita</h1>
 <p class="descripcion-pagina">Elije tus servicio y coloca tus datos</p>
 
-<div id="app">
 
+<div id="app">
 
     <!-- PESTEÑAS -->
     <nav class="tabs">
