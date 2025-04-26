@@ -2,16 +2,17 @@
 namespace Model;
 class ActiveRecord {
 
-    // Base DE DATOS
+    /* -- Base de Datos -- */
     protected static $db;
+    protected static $columnasDB = []; // Columnas de la BD
     protected static $tabla = '';
-    protected static $columnasDB = [];
 
     // Alertas y Mensajes
     protected static $alertas = [];
     
     // Definir la conexión a la BD - includes/database.php
-    public static function setDB($database) {
+    public static function setDB($database)
+    {
         self::$db = $database;
     }
 
@@ -112,7 +113,13 @@ class ActiveRecord {
     // Busca un registro por su id
     public static function find($id) {
         $query = "SELECT * FROM " . static::$tabla  ." WHERE id = {$id}";
+        $resultado = self::consultarSQL($query);
+        return array_shift( $resultado ) ;
+    }
 
+    // Busca un registro por where 
+    public static function where($columna, $valor) {
+        $query = "SELECT * FROM " . static::$tabla  ." WHERE $columna = '$valor'";
         $resultado = self::consultarSQL($query);
         return array_shift( $resultado ) ;
     }
@@ -122,19 +129,6 @@ class ActiveRecord {
         $query = "SELECT * FROM " . static::$tabla . " LIMIT {$limite}";
         $resultado = self::consultarSQL($query);
         return array_shift( $resultado ) ;
-    }
-
-    // Busca un registro por su id
-    public static function where($columna, $valor) {
-        $query = "SELECT * FROM " . static::$tabla  ." WHERE {$columna} = '{$valor}'";
-        $resultado = self::consultarSQL($query);
-        return array_shift( $resultado ) ;
-    }
-
-    // Consulta Plana de SQL (Utilizar cuando los métodos del modelo no son suficientes)
-    public static function SQL($query) {
-        $resultado = self::consultarSQL($query);
-        return $resultado;
     }
 
     // crea un nuevo registro
@@ -148,7 +142,9 @@ class ActiveRecord {
         $query .= " ) VALUES (' "; 
         $query .= join("', '", array_values($atributos));
         $query .= " ') ";
-        
+
+        return json_encode(['query' => $query]);
+
         // Resultado de la consulta
         $resultado = self::$db->query($query);
         return [

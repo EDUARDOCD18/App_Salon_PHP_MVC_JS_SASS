@@ -11,6 +11,7 @@ class CitaController
 
         if (!$_SESSION['nombre']) {
             session_start(); /* INICIA LA SESIÓN */
+            isAuth(); /* VERIFICA QUE LA SESIÓN ESTÉ INICIADA */
         }
 
         $router->render('cita/index', [
