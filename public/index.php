@@ -2,6 +2,7 @@
 
 require_once __DIR__ . '/../includes/app.php';
 
+use Controllers\AdminController;
 use Controllers\APIController;
 use Controllers\LoginController;
 use Controllers\CitaController;
@@ -32,6 +33,7 @@ $router->get('/mensaje', [LoginController::class, 'mensaje']);
 
 // Área privada
 $router->get('/cita', [CitaController::class, 'index']);
+$router->get('/admin', [AdminController::class, 'index']);
 
 // API de Citas
 $router->get('/api/servicios', [APIController::class, 'index']);
