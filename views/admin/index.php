@@ -33,7 +33,6 @@
             } // fin de if 
                 ?>
                 <p class="servicio"><?php echo $cita->servicio . " " . $cita->precio ?></p>
-                </li>
             <?php } // Fin del foreach
             ?>
     </ul>
