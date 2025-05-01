@@ -23,8 +23,8 @@
         ?>
                 <li>
                     <p>ID: <span><?php echo $cita->id; ?></span></p>
-                    <p>Hora: <span><?php echo date('h:i A', strtotime($cita->hora)); ?></span></p>
                     <p>Cliente: <span><?php echo $cita->cliente; ?></span></p>
+                    <p>Hora: <span><?php echo date('h:i A', strtotime($cita->hora)); ?></span></p>
                     <p>Email: <span><?php echo $cita->email; ?></span></p>
                     <p>Teléfono: <span><?php echo $cita->telefono; ?></span></p>
 
@@ -34,7 +34,7 @@
             } // fin de if 
             $total += $cita->precio;
                 ?>
-                <p class="servicio"><?php echo $cita->servicio . " $" . $cita->precio ?></p>
+                <p class="servicio"><?php echo $cita->servicio . " ($" . $cita->precio . ")"?> </p>
 
                 <?php
                 $actual = $cita->id;

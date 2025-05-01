@@ -112,6 +112,7 @@ function paginaSiguiente() {
     paso++;
 
     botonesPaginador();
+    mostrarResumen(); // Mostrar el resumen de la cita
   });
 }
 
@@ -386,11 +387,13 @@ async function reservarCita() {
         }, 3000);
       });
     }
-  } catch (error) {Swal.fire({
-    icon: "error",
-    title: "Error",
-    text: "Error al agendar la cita"
-  });}
+  } catch (error) {
+    Swal.fire({
+      icon: "error",
+      title: "Error",
+      text: "Error al agendar la cita",
+    });
+  }
 
   // console.log([...datos]);
 }
