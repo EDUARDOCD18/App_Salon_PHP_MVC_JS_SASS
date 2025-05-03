@@ -34,7 +34,7 @@
             } // fin de if 
             $total += $cita->precio;
                 ?>
-                <p class="servicio"><?php echo $cita->servicio . " ($" . $cita->precio . ")"?> </p>
+                <p class="servicio"><?php echo $cita->servicio . " ($" . $cita->precio . ")" ?> </p>
 
                 <?php
                 $actual = $cita->id;
@@ -49,3 +49,7 @@
             ?>
     </ul>
 </div>
+
+<?php
+$script = "<script src='build/js/buscador.js'></script>";
+?>
