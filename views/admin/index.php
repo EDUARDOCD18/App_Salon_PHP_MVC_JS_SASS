@@ -12,6 +12,11 @@
     </form>
 </div>
 
+<?php if (empty($citas)) {
+    echo "<h2>No hay citas agendadas</h2>";
+}  ?>
+
+
 <!-- Consultar las citas en el front -->
 <div class="citas-admin">
     <ul class="citas">
