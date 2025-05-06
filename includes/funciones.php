@@ -31,3 +31,11 @@ function isAuth(): void
         header('Location: /');
     }
 }
+
+// Verifica si el usuario es admin
+function isAdmin(): void
+{
+    if (!isset($_SESSION['admin'])) {
+        header('Location: /');
+    }
+}

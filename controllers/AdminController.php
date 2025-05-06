@@ -16,6 +16,9 @@ class AdminController
             }
         }
 
+        // Identificar que el usuario sea admin
+        isAdmin();
+
         $fecha = $_GET['fecha'] ?? date('Y-m-d');
         $fechas = explode('-', $fecha);
 
