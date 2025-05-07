@@ -49,21 +49,3 @@
     gap: $espaciado;
     grid-template-columns: repeat($columnas, 1fr);
 }
-
-@mixin scroll-style {
-    overflow-y: auto;
-    scrollbar-width: thin;
-    scrollbar-color: v.$negro v.$blanco;
-
-    &::-webkit-scrollbar {
-        width: 1rem;
-        height: 1rem;
-    }
-    &::-webkit-scrollbar-thumb {
-        background-color: v.$negro;
-        border-radius: 10px;
-    }
-    &::-webkit-scrollbar-track {
-        background-color: v.$blanco;
-    }
-}
