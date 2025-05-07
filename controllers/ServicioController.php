@@ -9,9 +9,13 @@ class ServicioController
     // Muestra los servicios
     public static function index(Router $router)
     {
-       $router->render('servicios/index', [
-        
-       ]);
+        if (!isset($_SESSION)) {
+            session_start();
+        }
+
+        $router->render('servicios/index', [
+            'nombre' => $_SESSION['nombre'] ?? null,
+        ]);
     }
 
     // Crear un nuevo servicio
@@ -21,6 +25,14 @@ class ServicioController
             // Lógica para crear un nuevo servicio
 
         }
+
+        if (!isset($_SESSION)) {
+            session_start();
+        }
+
+        $router->render('servicios/crear', [
+            'nombre' => $_SESSION['nombre'] ?? null,
+        ]);
     }
 
     // Actualizar un servicio existente
@@ -30,6 +42,14 @@ class ServicioController
             // Lógica para actualizar un servicio existente
 
         }
+
+        if (!isset($_SESSION)) {
+            session_start();
+        } 
+
+        $router->render('servicios/actualizar', [
+            'nombre' => $_SESSION['nombre'] ?? null,
+        ]);
     }
 
     // Eliminar un servicio
