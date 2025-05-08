@@ -14,8 +14,11 @@ class ServicioController
             session_start();
         }
 
+        $servicios = Servicio::all(); // Obtiene todos los servicios de la base de datos
+
         $router->render('servicios/index', [
             'nombre' => $_SESSION['nombre'] ?? null,
+            'servicios' => $servicios
         ]);
     }
 

@@ -3,7 +3,7 @@
 
 <?php
 
-/* include_once __DIR__ . '/../templates/barra.php';  */
+include_once __DIR__ . '/../templates/barra.php'; 
 include_once __DIR__ . '/../templates/alertas.php'; // Incluye el archivo de alertas
 
 ?>
