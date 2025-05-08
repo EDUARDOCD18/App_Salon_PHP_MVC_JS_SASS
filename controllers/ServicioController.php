@@ -2,7 +2,8 @@
 
 namespace Controllers;
 
-use MVC\Router;
+use Model\Servicio; // Importa el modelo Servicio
+use MVC\Router; // Importa la clase Router
 
 class ServicioController
 {
@@ -21,17 +22,28 @@ class ServicioController
     // Crear un nuevo servicio
     public static function crear(Router $router)
     {
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            // Lógica para crear un nuevo servicio
-
-        }
-
+        // Verifica si la sesión está iniciada
         if (!isset($_SESSION)) {
             session_start();
         }
 
+        $servicio = new Servicio; // Instancia del modelo Servicio
+        $alertas = []; // Inicializa un array para almacenar alertas
+        
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $servicio->sincronizar($_POST); // Sincroniza los datos del formulario con el modelo
+            $alertas = $servicio->validar(); // Valida los datos del servicio
+
+            if(empty($aletas)){
+                $servicio->guardar(); // Guarda el servicio en la base de datos
+                header('Location: /servicios'); // Redirige a la página de servicios
+            }
+        }
+
         $router->render('servicios/crear', [
             'nombre' => $_SESSION['nombre'] ?? null,
+            'servicio' => $servicio,
+            'alertas' => $alertas
         ]);
     }
 
