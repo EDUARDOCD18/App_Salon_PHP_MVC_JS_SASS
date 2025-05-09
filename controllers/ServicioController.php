@@ -84,8 +84,10 @@ class ServicioController
     public static function eliminar(Router $router)
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            // Lógica para eliminar un servicio
-
+            $id = $_POST['id']; // Obtiene el ID del servicio a eliminar
+            $servicio = Servicio::find($id); // Busca el servicio por ID
+            $servicio->eliminar(); // Elimina el servicio de la base de datos
+            header('Location: /servicios'); // Redirige a la página de servicios
         }
     }
 }
