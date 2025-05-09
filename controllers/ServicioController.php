@@ -12,6 +12,7 @@ class ServicioController
     {
         if (!isset($_SESSION)) {
             session_start();
+            isAdmin(); // Verifica si el usuario es administrador
         }
 
         $servicios = Servicio::all(); // Obtiene todos los servicios de la base de datos
@@ -28,6 +29,7 @@ class ServicioController
         // Verifica si la sesión está iniciada
         if (!isset($_SESSION)) {
             session_start();
+            isAdmin(); // Verifica si el usuario es administrador
         }
 
         $servicio = new Servicio; // Instancia del modelo Servicio
@@ -61,6 +63,7 @@ class ServicioController
         // Verifica si la sesión está iniciada
         if (!isset($_SESSION)) {
             session_start();
+            isAdmin(); // Verifica si el usuario es administrador
         } 
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -83,6 +86,12 @@ class ServicioController
     // Eliminar un servicio
     public static function eliminar(Router $router)
     {
+        // Verifica si la sesión está iniciada
+        if (!isset($_SESSION)) {
+            session_start();
+            isAdmin(); // Verifica si el usuario es administrador
+        } 
+
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $id = $_POST['id']; // Obtiene el ID del servicio a eliminar
             $servicio = Servicio::find($id); // Busca el servicio por ID
