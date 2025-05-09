@@ -53,9 +53,9 @@ class ServicioController
     // Actualizar un servicio existente
     public static function actualizar(Router $router)
     {
-        $id = is_numeric($_GET['id']); // Verifica si el ID es numérico
-        if (!$id) return; // Si no es numérico, retorna
-        $servicio = Servicio::find($id); // Busca el servicio por ID
+       
+        if(!is_numeric($_GET['id'])) return; // Verifica si el ID es numérico
+        $servicio = Servicio::find($_GET['id']); // Busca el servicio por ID
         $alertas = []; // Inicializa un array para almacenar alertas
 
         // Verifica si la sesión está iniciada
@@ -64,7 +64,13 @@ class ServicioController
         } 
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            // Lógica para actualizar un servicio existente
+            $servicio->sincronizar($_POST); // Sincroniza los datos del formulario con el modelo
+            $alertas = $servicio->validar(); // Valida los datos del servicio
+
+            if(empty($alertas)){
+                $servicio->guardar(); // Guarda el servicio en la base de datos
+                header('Location: /servicios'); // Redirige a la página de servicios
+            }
         }
 
         $router->render('servicios/actualizar', [
